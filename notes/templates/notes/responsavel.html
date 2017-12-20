@@ -1,0 +1,15 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+        
+    <h1>Responsavel</h1>
+    <form method="POST" class="tabela-lista">{% csrf_token %}
+    	<table class="table table-hover alinhamento">
+    		{{ form.as_table }}
+    	</table>
+        <button type="submit" class="save btn btn-default"><span class="glyphicon glyphicon-ok"></span></button>        
+        <a class="btn btn-default" href="{% url 'notes:home' %}"><span class="glyphicon glyphicon-remove"></span></a>
+    </form>	       
+
+{% endblock content %}
+

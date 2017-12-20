@@ -1,0 +1,13 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+        
+    <h1>Detalhes</h1>
+    {{ notes.responsavel }}<br>
+    {{ notes.descricao }}<br>
+    {{ notes.data }}<br><br><br>
+
+	<a class="btn btn-default" href="{% url 'notes:edita' pk=notes.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+	<a class="btn btn-default" href="{% url 'notes:delete' pk=notes.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
+
+{% endblock content %}

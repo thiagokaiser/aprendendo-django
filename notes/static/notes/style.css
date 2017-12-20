@@ -1,0 +1,20 @@
+.menu-principal {
+	max-width:500px;	
+}
+.tabela-lista {
+	max-width:800px;		
+}
+.alinhamento th{
+	width:150px;
+}
+.conteudo-principal{
+	margin-left:20px;
+}
+.errorlist{
+	color:red;
+	font-size:15px;	
+}
+.helptext{
+	font-size: 12px;
+	color:gray;
+}

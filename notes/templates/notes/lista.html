@@ -1,0 +1,13 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}        
+
+	<table class="table table-hover tabela-lista">
+		<tr><th>Responsavel </th><th>Descricao </th><th>Data</th></tr>
+		{% for notes in testeq %}
+			<tr><td>{{ notes.responsavel }}</td><td>{{ notes.descricao }}</td><td>{{ notes.data }}</td><td> <a class="btn btn-default" href="{% url 'notes:detalhe' pk=notes.pk %}"><span class="glyphicon glyphicon-list-alt"></span></a></td></tr>
+	        
+	    {% endfor %}
+	</table>	
+
+{% endblock content %}

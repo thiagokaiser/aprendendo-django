@@ -1,0 +1,15 @@
+{% extends 'notes/base.html' %}
+
+
+{% block content %}
+<h2>Profile</h2>
+
+	<p> Username: {{ user }} </p>
+	<p> First Name: {{ user.first_name }} </p>
+	<p> Last Name: {{ user.last_name }} </p>
+	<p> Email: {{ user.email }} </p>
+	<br>
+	<a class="btn btn-default" href="{% url 'notes:edit_profile' %}"><span class="glyphicon glyphicon-pencil"></span></a>
+	<a class="btn btn-default" href="{% url 'notes:change-password' %}">Change Password</span></a>
+
+{% endblock %}

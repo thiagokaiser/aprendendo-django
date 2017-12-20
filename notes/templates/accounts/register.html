@@ -1,0 +1,17 @@
+{% extends 'notes/base.html' %}
+
+{% block menuprincipal %}
+{% endblock menuprincipal %}
+{% block content %}
+<h2>Profile</h2>
+
+<form method="POST">
+	{% csrf_token %}
+	<table class="table">
+		{{ form.as_table }}
+	</table>
+	<button type="submit">Submit</button>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+        {% block title %}
+                <title>Título</title>
+        {% endblock title %}
+
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'notes/bootstrap.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'notes/style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'notes/style.css' %}" />
+        <script type="text/javascript" src="{% static 'notes/jquery.js' %}"></script>        
+        <script type="text/javascript" src="{% static 'notes/jquery.mask.js' %}"></script>
+</head>
+<body>
+        <br>
+        <div class="menu-principal">
+                <div class="">
+                {% if request.user.is_authenticated == False %}
+                        <a class="" href="{% url 'notes:login' %}">Login</a>                
+                        <a class="" href="{% url 'notes:register' %}">Register</a>                
+                {% else %}                        
+                        <a href="{% url 'notes:profile' %}">{{ user.get_username }}</a>
+                        <a class="" href="{% url 'notes:logout' %}">Logout</a>                     
+                {% endif %}
+                </div>          
+                {% block menuprincipal %}
+                <div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group" role="group">
+                                <a type="button" class="btn btn-default" href="{% url 'notes:home' %}">Início</a>
+                        </div>
+                        <div class="btn-group" role="group">
+                                <a type="button" class="btn btn-default" href="{% url 'notes:lista' %}">Lista</a>
+                        </div>
+                        <div class="btn-group" role="group">
+                                <a type="button" class="btn btn-default" href="{% url 'notes:cadastra' %}">Cadastra</a>                
+                        </div>                        
+                </div>  
+                {% endblock menuprincipal %}                
+        </div>
+        <br>
+
+        <div class="conteudo-principal">
+        {% block content %}
+
+        {% endblock content %}
+
+        </div>
+
+        
+</body>
+</html>
