@@ -18,6 +18,6 @@ urlpatterns = [
     url(r'^register/$', views.Register , name='register'),
     url(r'^change-password/$', views.Change_Password , name='change-password'),
     url(r'^responsavel/$', views.Add_Responsavel , name='add-responsavel'),
-    url(r'^responsavel/Edit$', views.Edit_Responsavel , name='edit-responsavel'),
+    url(r'^responsavel/(?P<pk>\d+)/Edit$', views.Edit_Responsavel , name='edit-responsavel'),
 
 ]

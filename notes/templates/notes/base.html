@@ -7,49 +7,67 @@
 
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static 'notes/bootstrap.css' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'notes/style.css' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'notes/style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'notes/style.css' %}" />        
         <script type="text/javascript" src="{% static 'notes/jquery.js' %}"></script>        
         <script type="text/javascript" src="{% static 'notes/jquery.mask.js' %}"></script>
 </head>
-<body>
-        <br>
-        <div class="menu-principal">
-                <div class="">
-                {% if request.user.is_authenticated == False %}
-                        <a class="" href="{% url 'notes:login' %}">Login</a>                
-                        <a class="" href="{% url 'notes:register' %}">Register</a>                
-                {% else %}                        
-                        <a href="{% url 'notes:profile' %}">{{ user.get_username }}</a>
-                        <a class="" href="{% url 'notes:logout' %}">Logout</a>                     
-                {% endif %}
-                </div>          
-                {% block menuprincipal %}
-                <div class="btn-group btn-group-justified" role="group">
-                        <div class="btn-group" role="group">
-                                <a type="button" class="btn btn-default" href="{% url 'notes:home' %}">Início</a>
-                        </div>
-                        <div class="btn-group" role="group">
-                                <a type="button" class="btn btn-default" href="{% url 'notes:lista' %}">Lista</a>
-                        </div>
-                        <div class="btn-group" role="group">
-                                <a type="button" class="btn btn-default" href="{% url 'notes:cadastra' %}">Cadastra</a>                
-                        </div>                        
-                        <div class="btn-group" role="group">
-                                <a type="button" class="btn btn-default" href="{% url 'notes:add-responsavel' %}">Responsavel</a>                
-                        </div>                                                
-                </div>  
-                {% endblock menuprincipal %}                
-        </div>
-        <br>
-
-        <div class="conteudo-principal">
-        {% block content %}
-
-        {% endblock content %}
-
+<body>        
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'notes:home' %}">Home</a>
         </div>
 
-        
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Anotações <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'notes:cadastra' %}">Cadastra</a></li>
+                <li><a href="{% url 'notes:lista' %}">Lista</a></li>                    
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav">            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Responsavel <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'notes:add-responsavel' %}">Cadastra</a></li>
+                <li><a href="#">Consulta/Edita</a></li>
+                
+              </ul>
+            </li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            {% if request.user.is_authenticated == False %}
+            <li><a href="{% url 'notes:login' %}">Login</a></li>            
+            <li><a href="{% url 'notes:register' %}">Register</a></li>            
+            {% else %} 
+            <li><a href="{% url 'notes:profile' %}">{{ user.get_username }}</a></li>            
+            <li><a class="" href="{% url 'notes:logout' %}">Logout</a> </li>            
+
+            {% endif %}
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    
+    <div class="conteudo-principal">
+    {% block content %}
+
+    {% endblock content %}
+
+    </div>
+    </div>
+    <script type="text/javascript" src="{% static 'notes/bootstrap.js' %}"></script>
 </body>
 </html>
