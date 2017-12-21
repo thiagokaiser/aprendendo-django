@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-        {% block title %}
-                <title>Título</title>
-        {% endblock title %}
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  {% block title %}
+    <title>Título</title>
+  {% endblock title %}
 
-        {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static 'notes/bootstrap.css' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'notes/style.css' %}" />        
-        <script type="text/javascript" src="{% static 'notes/jquery.js' %}"></script>        
-        <script type="text/javascript" src="{% static 'notes/jquery.mask.js' %}"></script>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'notes/bootstrap.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'notes/style.css' %}" />        
+  <script type="text/javascript" src="{% static 'notes/jquery.js' %}"></script>        
+  <script type="text/javascript" src="{% static 'notes/jquery.mask.js' %}"></script>
 </head>
 <body>        
     <nav class="navbar navbar-default">
