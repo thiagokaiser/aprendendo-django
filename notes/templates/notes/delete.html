@@ -2,12 +2,20 @@
 
 {% block content %}
         
-
+<h1>Detalhes</h1>
 <form method="post">{% csrf_token %}
-	<h4>Are you sure you want to delete "{{ note.responsavel }}" ?</h4>
+	<div class="divdeleta">
+		<h4>Are you sure you want to delete ?</h4>
+		<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-ok"></span> </button>
+	    <a class="btn btn-default" href="{% url 'notes:detalhe' pk=notes.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+	    <p>
+    </div
 		<br>
-    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-ok"></span> </button>
-    <a class="btn btn-default" href="{% url 'notes:lista' %}"><span class="glyphicon glyphicon-remove"></span></a>
+		<table class="table table-hover alinhamento">
+			{{ form.as_table }}
+		</table>
+    
 </form>
+
 
 {% endblock content %}

@@ -19,6 +19,7 @@ from django.contrib.auth.forms import (
 from .models import Note, Responsavel
 from .forms import (
     NoteForm,
+    NoteFormView,
     EditProfileForm,
     RegisterProfileForm,
     ResponsavelForm,
@@ -60,20 +61,24 @@ def Edita(request, pk):
 	else:
 		form = NoteForm(instance=NoteEdit)
 
-	return render(request, 'notes/edita.html', {'form': form})
+	return render(request, 'notes/edita.html', {'form': form, 'notes': NoteEdit})
 
 def Detalhe(request, pk):
     NoteDetail = get_object_or_404(Note, pk=pk)
-    return render(request, 'notes/detalhe.html', {'notes': NoteDetail})
+    form = NoteFormView(instance=NoteDetail)
+    args = {'form': form, 'notes': NoteDetail}    
+    return render(request, 'notes/detalhe.html', args)
 
 def Delete(request, pk):
     note = get_object_or_404(Note, pk=pk)    
+    form = NoteFormView(instance=note)
+
     if request.method=='POST':
         note.delete()
         return redirect('notes:lista')
 
 
-    return render(request, 'notes/delete.html', {'note':note})
+    return render(request, 'notes/delete.html', {'form': form, 'notes':note})
 
 def Profile(request):
     args = {'user': request.user}

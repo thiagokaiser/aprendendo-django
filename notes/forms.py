@@ -19,6 +19,18 @@ class NoteForm(forms.ModelForm):
 			raise ValidationError("Responsavel não cadastrado")			
 		return responsavel
 
+class NoteFormView(forms.ModelForm):	
+	responsavel = forms.CharField(disabled=True)
+	descricao = forms.CharField(widget=forms.Textarea, disabled=True)	
+	data = forms.DateField(disabled=True)
+	class Meta:
+		model = Note
+		fields = (
+		'responsavel',
+		'descricao',
+		'data',
+		)
+
 class ResponsavelForm(forms.ModelForm):	
 	class Meta:
 		model = Responsavel		
@@ -34,6 +46,7 @@ class ResponsavelForm(forms.ModelForm):
 		return responsavel
 
 class ResponsavelFormEdit(forms.ModelForm):	
+	responsavel = forms.CharField(disabled=True)
 	class Meta:
 		model = Responsavel		
 		fields = (
