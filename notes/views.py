@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import (
@@ -20,7 +21,8 @@ from .forms import (
     NoteForm,
     EditProfileForm,
     RegisterProfileForm,
-    ResponsavelForm
+    ResponsavelForm,
+    ResponsavelFormEdit
     )
 
 
@@ -34,17 +36,17 @@ def Home(request):
 	return render(request, 'notes/home.html', {})
 
 def Cadastra(request):
-	if request.method == 'POST':
-		form = NoteForm(request.POST)
+    if request.method == 'POST':
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            anotacao = form.save(commit=False)            
+            anotacao.data = timezone.now()
+            anotacao.save()            
+            return redirect('notes:lista')
+    else:
+        form = NoteForm()
 
-		if form.is_valid():
-			form.save()
-			return redirect('notes:lista')
-
-	else:
-		form = NoteForm()
-
-	return render(request, 'notes/edita.html', {'form': form})
+    return render(request, 'notes/edita.html', {'form': form})
 
 def Edita(request, pk):	
 	NoteEdit = get_object_or_404(Note, pk=pk)
@@ -132,10 +134,11 @@ def Change_Password(request):
 def Add_Responsavel(request):
     if request.method == 'POST':
         form = ResponsavelForm(request.POST)
-
         if form.is_valid():
-            form.save()
-            return redirect('notes:home')
+            responsavel = form.save(commit=False)            
+            responsavel.data_registro = timezone.now()
+            responsavel.save()
+            return redirect('notes:lista-responsavel')
 
     else:
         form = ResponsavelForm()
@@ -145,13 +148,31 @@ def Add_Responsavel(request):
 def Edit_Responsavel(request, pk): 
     ResponsavelEdit = get_object_or_404(Responsavel, pk=pk)
     if request.method == 'POST':
-        form = ResponsavelForm(request.POST, instance=ResponsavelEdit)
+        form = ResponsavelFormEdit(request.POST, instance=ResponsavelEdit)
 
         if form.is_valid():
             form.save()
-            return redirect('notes:home', pk=pk)
+            return redirect('notes:detalhe-responsavel', pk=pk)
 
     else:
-        form = ResponsavelForm(instance=ResponsavelEdit)
+        form = ResponsavelFormEdit(instance=ResponsavelEdit)
 
     return render(request, 'notes/responsavel.html', {'form': form})
+
+def Detalhe_Responsavel(request, pk):
+    ResponsavelDetail = get_object_or_404(Responsavel, pk=pk)
+    return render(request, 'notes/detalhe_responsavel.html', {'responsavel': ResponsavelDetail})
+
+def Lista_Responsavel(request):
+    latest_question_list = Responsavel.objects.order_by('responsavel')
+    context = {'lista_resp': latest_question_list}
+    return render(request, 'notes/lista_responsavel.html', context)
+
+def Delete_Responsavel(request, pk):
+    responsavel = get_object_or_404(Responsavel, pk=pk)    
+    if request.method=='POST':
+        responsavel.delete()
+        return redirect('notes:lista-responsavel')
+
+
+    return render(request, 'notes/delete_responsavel.html', {'responsavel':responsavel})

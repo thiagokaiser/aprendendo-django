@@ -5,12 +5,12 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.exceptions import ValidationError
 
 class NoteForm(forms.ModelForm):	
+	descricao = forms.CharField(widget=forms.Textarea)
 	class Meta:
-		model = Note		
+		model = Note
 		fields = (
 		'responsavel',
-		'descricao',
-		'data'
+		'descricao',		
 		)
 
 	def clean_responsavel(self):
@@ -32,6 +32,14 @@ class ResponsavelForm(forms.ModelForm):
 		if Responsavel.objects.filter(responsavel=responsavel).exists():
 			raise ValidationError("Responsavel já cadastrado")			
 		return responsavel
+
+class ResponsavelFormEdit(forms.ModelForm):	
+	class Meta:
+		model = Responsavel		
+		fields = (
+		'responsavel',
+		'descricao'
+		)	
 
 class EditProfileForm(UserChangeForm):
 	class Meta:

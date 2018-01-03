@@ -9,8 +9,8 @@ class Note(models.Model):
         return self.descricao
 
 class Responsavel(models.Model):
-    responsavel = models.CharField(max_length=80)
-    descricao = models.CharField(max_length=800)
+    responsavel = models.CharField('Codigo', max_length=80)
+    descricao = models.CharField('Nome Completo', max_length=800)
     data_registro = models.DateField('Date', null=True)    
     def __str__(self):
         return self.responsavel

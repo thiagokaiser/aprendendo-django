@@ -1,0 +1,13 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+        
+
+<form method="post">{% csrf_token %}
+	<h4>Are you sure you want to delete "{{ responsavel.responsavel }}" ?</h4>
+		<br>
+    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-ok"></span> </button>
+    <a class="btn btn-default" href="{% url 'notes:lista-responsavel' %}"><span class="glyphicon glyphicon-remove"></span></a>
+</form>
+
+{% endblock content %}
