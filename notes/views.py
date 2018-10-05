@@ -26,6 +26,8 @@ from .forms import (
     ResponsavelFormEdit
     )
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 #@login_required(login_url='notes:login')
 def Lista(request):
@@ -164,9 +166,10 @@ def Edit_Responsavel(request, pk):
 
     return render(request, 'notes/responsavel.html', {'form': form})
 
-def Detalhe_Responsavel(request, pk):
+def Detalhe_Responsavel(request, pk):        
     ResponsavelDetail = get_object_or_404(Responsavel, pk=pk)
-    return render(request, 'notes/detalhe_responsavel.html', {'responsavel': ResponsavelDetail})
+    return render(request, 'notes/detalhe_responsavel.html',
+         {'responsavel': ResponsavelDetail})
 
 def Lista_Responsavel(request):
     latest_question_list = Responsavel.objects.order_by('responsavel')
@@ -181,3 +184,19 @@ def Delete_Responsavel(request, pk):
 
 
     return render(request, 'notes/delete_responsavel.html', {'responsavel':responsavel})
+
+
+
+def User_List(request):
+    user_list = User.objects.all()
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(user_list, 10)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    return render(request, 'notes/user_list.html', { 'users': users })

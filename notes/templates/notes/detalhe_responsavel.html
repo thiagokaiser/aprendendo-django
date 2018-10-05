@@ -7,6 +7,11 @@
     {{ responsavel.descricao }}<br>
     {{ responsavel.data_registro }}<br><br><br>
 
+    
+    {{ teste2.descricao }}
+    
+
+
 	<a class="btn btn-default" href="{% url 'notes:edit-responsavel' pk=responsavel.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
 	<a class="btn btn-default" href="{% url 'notes:delete-responsavel' pk=responsavel.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
 

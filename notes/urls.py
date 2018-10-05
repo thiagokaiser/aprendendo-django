@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^responsavel/(?P<pk>\d+)/Detalhe$', views.Detalhe_Responsavel , name='detalhe-responsavel'),
     url(r'^responsavel/(?P<pk>\d+)/Delete$', views.Delete_Responsavel , name='delete-responsavel'),
     url(r'^responsavel/lista$', views.Lista_Responsavel , name='lista-responsavel'),
+    url(r'^user/lista$', views.User_List , name='user-list'),
 
 ]

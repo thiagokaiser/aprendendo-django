@@ -48,6 +48,11 @@
               </ul>
             </li>
           </ul>
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="{% url 'notes:user-list' %}">Lista User</a>              
+            </li>
+          </ul>
           
           <ul class="nav navbar-nav navbar-right">
             {% if request.user.is_authenticated == False %}
